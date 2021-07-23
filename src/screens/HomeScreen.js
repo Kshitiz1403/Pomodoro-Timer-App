@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
 import colors from '../constants/colors'
 import Colors from '../constants/colors'
 
 const HomeScreen = () => {
-
     //                                  To do  
     //  Notification on start of the timer
     //  Alert on the end of the timer - Close or Start Break
@@ -18,6 +17,7 @@ const HomeScreen = () => {
     // 
     // 
 
+    const height = useWindowDimensions().height
 
     const initialTimeState = { m: 25, s: 60 }
 
@@ -87,10 +87,22 @@ const HomeScreen = () => {
             </Text>
 
             {/* title={isStart == false ? 'start' : 'reset'} */}
-            <TouchableOpacity onPress={isStart == false ? runHandler : resetHandler} style={[styles.button, { backgroundColor: isStart == false ? Colors.secondary : Colors.tertiary }]} />
-            <View style={{ backgroundColor: '#2a9d8f', height: 200, width: 500, position: 'absolute', bottom: 0 }}>
 
+            <View style={[styles.buttonContainer, { bottom: height * 0.25 }]}>
+                <TouchableOpacity
+                    style={[styles.button,
+                    {
+                        backgroundColor: isStart == false ?
+                            Colors.secondary :
+                            Colors.tertiary
+                    }
+                    ]}
+                    onPress={isStart == false ? runHandler : resetHandler}
+                />
             </View>
+            {/* <View style={{ backgroundColor: '#2a9d8f', height: 200, width: 500, position: 'absolute', bottom: 0 }}>
+
+            </View> */}
         </View>
     )
 }
@@ -112,5 +124,8 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 25
+    },
+    buttonContainer: {
+        position: 'absolute',
     }
 })

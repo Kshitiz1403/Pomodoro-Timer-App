@@ -8,17 +8,17 @@ import Settings from '../screens/Settings'
 
 const RootStack = createStackNavigator(
     {
-        Settings: {
-            screen: Settings,
-            navigationOptions:{
-                headerShown:true,
-                headerStyle:{
-                    backgroundColor:colors.primary,
-                    // elevation:0
-                },
-                headerTintColor:'white'
-            },
-        },
+        // Settings: {
+        //     screen: Settings,
+        //     navigationOptions:{
+        //         headerShown:true,
+        //         headerStyle:{
+        //             backgroundColor:colors.primary,
+        //             // elevation:0
+        //         },
+        //         headerTintColor:'white'
+        //     },
+        // },
         Home: {
             screen: HomeScreen,
             navigationOptions: {
