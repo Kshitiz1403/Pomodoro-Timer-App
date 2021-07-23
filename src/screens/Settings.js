@@ -3,11 +3,13 @@ import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity, Touchab
 import CheckBox from '@react-native-community/checkbox';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import * as Linking from 'expo-linking';
 
 import colors from '../constants/colors'
 
 const Settings = () => {
 
+    const [isAMOLED, setIsAMOLED] = useState(false)
     const [isKeepScreenOn, setIsKeepScreenOn] = useState(false)
     const [isVibrationOn, setIsVibrationOn] = useState(false)
 
@@ -19,8 +21,26 @@ const Settings = () => {
                         <Text style={styles.listItemText}>Timer Duration</Text>
                         <Text style={styles.listItemDetailText}>Set the duration for work and break sessions</Text>
                     </View>
-
                 </View>
+
+                <Pressable
+                    onPress={() => setIsAMOLED(v => !v)}
+                    android_ripple={{ color: colors.underlayGray }}
+                >
+                    <View style={styles.listItem}>
+                        <View>
+                            <Text style={styles.listItemText}>{`AMOLED Theme (Experimental)`}</Text>
+                            <Text style={styles.listItemDetailText}>Changes the UI to Black and White</Text>
+                        </View>
+
+                        <CheckBox
+                            value={isAMOLED}
+                            onValueChange={(value) => setIsAMOLED(value)}
+                            tintColors={{ true: colors.secondary, false: colors.lightGreen }}
+                        />
+                    </View>
+                </Pressable>
+
 
                 <Pressable
                     onPress={() => setIsKeepScreenOn(v => !v)}
@@ -34,7 +54,7 @@ const Settings = () => {
 
                         <CheckBox
                             value={isKeepScreenOn}
-                            onValueChange={setIsKeepScreenOn}
+                            onValueChange={(value) => setIsKeepScreenOn(value)}
                             tintColors={{ true: colors.secondary, false: colors.lightGreen }}
                         />
                     </View>
@@ -51,7 +71,7 @@ const Settings = () => {
                         </View>
                         <CheckBox
                             value={isVibrationOn}
-                            onValueChange={setIsVibrationOn}
+                            onValueChange={(value) => setIsVibrationOn(value)}
                             tintColors={{ true: colors.secondary, false: colors.lightGreen }}
                         />
                     </View>
@@ -60,30 +80,53 @@ const Settings = () => {
                 <View style={styles.sectionHeadingContainer}>
                     <Text style={styles.sectionHeadingText}>General</Text>
                 </View>
-                <View style={styles.listItem}>
-                    <View style={styles.listItemWithIcons}>
-                        <Ionicons name="information-circle" size={24} color="white" />
-                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>How to Use</Text>
+                <Pressable
+                    onPress={() => Linking.openURL('https://www.linkedin.com/in/kshitizagrawal/')}
+                    android_ripple={{ color: colors.underlayGray }}
+                >
+                    <View style={styles.listItem}>
+                        <View style={styles.listItemWithIcons}>
+                            <Ionicons name="information-circle" size={24} color="white" />
+                            <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>How to Use</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.listItem}>
-                    <View style={styles.listItemWithIcons}>
-                        <Ionicons name="people" size={24} color="white" />
-                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>About the **name of the App**</Text>
+                </Pressable>
+
+                <Pressable
+                    onPress={() => Linking.openURL('https://www.linkedin.com/in/kshitizagrawal/')}
+                    android_ripple={{ color: colors.underlayGray }}
+                >
+                    <View style={styles.listItem}>
+                        <View style={styles.listItemWithIcons}>
+                            <Ionicons name="people" size={24} color="white" />
+                            <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>About the **name of the App**</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.listItem}>
-                    <View style={styles.listItemWithIcons}>
-                        <Ionicons name="star" size={24} color="white" />
-                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>Rate Us</Text>
+                </Pressable>
+
+                <Pressable
+                    onPress={() => Linking.openURL('https://www.linkedin.com/in/kshitizagrawal/')}
+                    android_ripple={{ color: colors.underlayGray }}
+                >
+                    <View style={styles.listItem}>
+                        <View style={styles.listItemWithIcons}>
+                            <Ionicons name="star" size={24} color="white" />
+                            <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>Rate Us</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.listItem}>
-                    <View style={styles.listItemWithIcons}>
-                        <Ionicons name="share-social" size={24} color="white" />
-                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>Share to friends</Text>
+                </Pressable>
+
+                <Pressable
+                    onPress={() => { Linking.openURL('https://www.linkedin.com/in/kshitizagrawal/') }}
+                    android_ripple={{ color: colors.underlayGray }}
+                >
+                    <View style={styles.listItem}>
+                        <View style={styles.listItemWithIcons}>
+                            <Ionicons name="share-social" size={24} color="white" />
+                            <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>Share to friends</Text>
+                        </View>
                     </View>
-                </View>
+                </Pressable>
 
 
 
@@ -117,7 +160,7 @@ const styles = StyleSheet.create({
     },
     listItemWithIcons: {
         flexDirection: 'row',
-        alignItems:'center'
+        alignItems: 'center'
     },
     sectionHeadingContainer: {
         margin: 20,
