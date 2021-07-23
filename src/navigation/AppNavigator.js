@@ -19,7 +19,7 @@ const RootStack = createStackNavigator(
                 headerShown:true,
                 headerStyle:{
                     backgroundColor:colors.primary,
-                    // elevation:0
+                    elevation:0
                     
                 },
                 headerTintColor:'white'

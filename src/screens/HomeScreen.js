@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions, Settings } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions, Alert } from 'react-native'
 import colors from '../constants/colors'
 import Colors from '../constants/colors'
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -13,19 +13,26 @@ const HomeScreen = ({ navigation }) => {
     //  Add functionality to set custom pomodoro and break duration 
     //  Record all pomodoros with the time they started in Async Storage
     //  Fetch the pomodoros from Async Storage and display a productivity graph
-    //  
-    // 
-    // 
+    //  Add ambient audio functionality using expo-av https://docs.expo.io/versions/latest/sdk/audio/
+    //  Time flickers when paused
+    //  Let app run in background
     // 
 
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
 
-    const initialTimeState = { m: 2, s: 60 }
+    const initialTimeState = { m: 5, s: 60 }
+    const initialBreakState = { m: 2, s: 60 }
 
     const [time, setTime] = useState(initialTimeState)
 
     const [isStart, setIsStart] = useState(false)
+
+    const [isPaused, setIsPaused] = useState(false)
+
+    const [isBreakSessionExecuted, setIsBreakSessionExecuted] = useState(false)
+
+    let numberOfTimerCyclesRun = 0;
 
     let updatedM = time.m, updatedS = time.s
 
@@ -40,8 +47,9 @@ const HomeScreen = ({ navigation }) => {
 
     const runHandler = () => {
         startHandler()
-        refreshIntervalId = setInterval(startHandler, 1000)
+        refreshIntervalId = setInterval(startHandler, 10)
         setIsStart(true)
+        numberOfTimerCyclesRun++
         return (
             refreshIntervalId
         )
@@ -55,6 +63,11 @@ const HomeScreen = ({ navigation }) => {
         )
     }
 
+    // const runBreakTimer = () =>{
+    //     console.log(time)
+    //     // runHandler()
+    // }
+
     let second = time.s
     if (second == 60) {
         second = '0'
@@ -67,11 +80,35 @@ const HomeScreen = ({ navigation }) => {
         second = `0${second}`
     }
 
+    
+
     let minute = time.m
     if (minute < 0) {
-        alert('done')
+        // Here the main timer stops
+
+        setIsBreakSessionExecuted(false)
+        if (isBreakSessionExecuted == false) {
+            Alert.alert(
+                'Session Finished', '', [
+                { text: 'close', onPress: () => { console.log('alert closed') } },
+                { text: 'start break', onPress: () => { changeTimerStateToBreakState() } }
+            ]
+            )
+            setIsBreakSessionExecuted(true)
+        }
         resetHandler()
     }
+
+    const changeTimerStateToBreakState = () => {
+        setTime(initialBreakState)    
+    }
+
+
+    const pauseHandler = () => {
+        isPaused == true ? runHandler() : clearInterval(refreshIntervalId)
+        setIsPaused(v => !v)
+    }
+    // {console.log(numberOfTimerCyclesRun)}
 
     return (
         <View style={styles.container}>
@@ -80,12 +117,23 @@ const HomeScreen = ({ navigation }) => {
                 {colors.primary}
             />
 
-            <Text style={styles.timer}>
+            <TouchableOpacity activeOpacity={0.6} onPress={() => pauseHandler()}>
+                <Text style={styles.timer}>
+                    {time.m > 10 ? time.m : `0${time.m}`} : {second}
+                </Text>
+            </TouchableOpacity>
 
-                {time.m > 10 ? time.m : `0${time.m}`} : {second}
-            </Text>
-
-            <View style={[styles.buttonContainer, { bottom: deviceHeight * 0.25 }]}>
+            <View style={[styles.buttonContainer, { bottom: deviceHeight * 0.25, width: deviceWidth * 0.5 }]}>
+                {/* <TouchableOpacity
+                    style={[styles.button, 
+                    {
+                        backgroundColor: isStart == false ?
+                            Colors.secondary :
+                            Colors.tertiary
+                    }
+                    ]}
+                    onPress={isStart == false ? runHandler : resetHandler}
+                /> */}
                 <TouchableOpacity
                     style={[styles.button,
                     {
@@ -127,14 +175,18 @@ const styles = StyleSheet.create({
     button: {
         width: 50,
         height: 50,
-        borderRadius: 50
+        borderRadius: 50,
+        marginHorizontal: 50
     },
     buttonContainer: {
         position: 'absolute',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     settingsContainer: {
         position: 'absolute',
         alignSelf: 'flex-start',
-        padding:10
+        padding: 10
     }
 })
