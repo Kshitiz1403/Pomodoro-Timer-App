@@ -29,7 +29,7 @@
       "favicon": "./assets/favicon.png"
     },
     "androidNavigationBar": {
-      "visible": "false",
+      "visible": false,
       "barStyle": "dark-content",
       "backgroundColor": "#264653"
     }

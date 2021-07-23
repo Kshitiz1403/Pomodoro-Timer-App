@@ -76,7 +76,7 @@ const HomeScreen = () => {
             <StatusBar
                 backgroundColor=
                 {colors.primary}
-                // {isStart == false ? colors.secondary : colors.tertiary}
+            // {isStart == false ? colors.secondary : colors.tertiary}
             />
 
             <Text style={styles.timer}>
@@ -88,7 +88,7 @@ const HomeScreen = () => {
 
             {/* title={isStart == false ? 'start' : 'reset'} */}
             <TouchableOpacity onPress={isStart == false ? runHandler : resetHandler} style={[styles.button, { backgroundColor: isStart == false ? Colors.secondary : Colors.tertiary }]} />
-            <View style={{backgroundColor:'#2a9d8f', height:100, width:500, position:'absolute', bottom:0}}>
+            <View style={{ backgroundColor: '#2a9d8f', height: 200, width: 500, position: 'absolute', bottom: 0 }}>
 
             </View>
         </View>
