@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import Colors from '../constants/colors'
 
 const HomeScreen = () => {
 
@@ -78,8 +79,7 @@ const HomeScreen = () => {
             </Text>
 
             {/* title={isStart == false ? 'start' : 'reset'} */}
-            <TouchableOpacity onPress={isStart == false ? runHandler : resetHandler} style={styles.button} />
-
+            <TouchableOpacity onPress={isStart == false ? runHandler : resetHandler} style={[styles.button, { backgroundColor: isStart == false ? Colors.secondary : Colors.tertiary }]} />
         </View>
     )
 }
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#264653',
+        backgroundColor: Colors.primary,
     },
     timer: {
         color: 'white',
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 50,
-        backgroundColor: '#e76f51',
+        // backgroundColor: colors.secondary,
         height: 50,
         borderRadius: 25
     }
