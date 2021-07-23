@@ -5,6 +5,8 @@ const HomeScreen = () => {
 
     const [time, setTime] = useState({ m: 25, s: 60 })
 
+    const [isStart, setIsStart] = useState(false)
+
     let updatedM = time.m, updatedS = time.s
 
     const startHandler = () => {
@@ -18,12 +20,14 @@ const HomeScreen = () => {
 
     const run = () => {
         refreshIntervalId = setInterval(startHandler, 1000)
+        setIsStart(true)
         return (
             refreshIntervalId
         )
     }
 
     const resetHandler = () => {
+        setIsStart(false)
         return (
             clearInterval(refreshIntervalId),
             setTime({ m: 25, s: 0 })
@@ -58,8 +62,8 @@ const HomeScreen = () => {
             </Text>
 
             <View style={{ flexDirection: 'row' }}>
-                <Button title='start' onPress={run} />
-                <Button title='reset' onPress={resetHandler} />
+                <Button title={isStart == false ? 'start' : 'reset'} onPress={isStart == false ? run : resetHandler} />
+                {/* <Button title='reset' onPress={resetHandler} /> */}
             </View>
         </View>
     )
