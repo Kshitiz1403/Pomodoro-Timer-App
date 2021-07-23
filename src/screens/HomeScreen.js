@@ -155,7 +155,7 @@ const HomeScreen = ({ navigation }) => {
 
             <TouchableOpacity
                 onPress={() => navigation.navigate('Settings')}
-                style={[styles.settingsContainer, { marginHorizontal: deviceHeight * 0.1, bottom: deviceHeight * 0.05 }]}>
+                style={[styles.settingsContainer, { marginHorizontal: deviceWidth * 0.1, bottom: deviceHeight * 0.05 }]}>
                 <SimpleLineIcons name="settings" size={24} color="white" />
             </TouchableOpacity>
 
