@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions, Settings } from 'react-native'
 import colors from '../constants/colors'
 import Colors from '../constants/colors'
+import { SimpleLineIcons } from '@expo/vector-icons';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     //                                  To do  
     //  Notification on start of the timer
     //  Alert on the end of the timer - Close or Start Break
@@ -17,9 +18,10 @@ const HomeScreen = () => {
     // 
     // 
 
-    const height = useWindowDimensions().height
+    const deviceHeight = useWindowDimensions().height
+    const deviceWidth = useWindowDimensions().width
 
-    const initialTimeState = { m: 25, s: 60 }
+    const initialTimeState = { m: 2, s: 60 }
 
     const [time, setTime] = useState(initialTimeState)
 
@@ -76,19 +78,14 @@ const HomeScreen = () => {
             <StatusBar
                 backgroundColor=
                 {colors.primary}
-            // {isStart == false ? colors.secondary : colors.tertiary}
             />
 
             <Text style={styles.timer}>
 
                 {time.m > 10 ? time.m : `0${time.m}`} : {second}
-                {/* {time.s == 60 ? '00' : time.s} */}
-                {/* {time.s > 9 ? time.s : `0${time.s}`} */}
             </Text>
 
-            {/* title={isStart == false ? 'start' : 'reset'} */}
-
-            <View style={[styles.buttonContainer, { bottom: height * 0.25 }]}>
+            <View style={[styles.buttonContainer, { bottom: deviceHeight * 0.25 }]}>
                 <TouchableOpacity
                     style={[styles.button,
                     {
@@ -103,6 +100,13 @@ const HomeScreen = () => {
             {/* <View style={{ backgroundColor: '#2a9d8f', height: 200, width: 500, position: 'absolute', bottom: 0 }}>
 
             </View> */}
+
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Settings')}
+                style={[styles.settingsContainer, { marginHorizontal: deviceHeight * 0.1, bottom: deviceHeight * 0.05 }]}>
+                <SimpleLineIcons name="settings" size={24} color="white" />
+            </TouchableOpacity>
+
         </View>
     )
 }
@@ -123,9 +127,14 @@ const styles = StyleSheet.create({
     button: {
         width: 50,
         height: 50,
-        borderRadius: 25
+        borderRadius: 50
     },
     buttonContainer: {
         position: 'absolute',
+    },
+    settingsContainer: {
+        position: 'absolute',
+        alignSelf: 'flex-start',
+        padding:10
     }
 })

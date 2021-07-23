@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity, TouchableHighlight, Pressable, } from 'react-native'
 import CheckBox from '@react-native-community/checkbox';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import colors from '../constants/colors'
 
@@ -58,8 +59,29 @@ const Settings = () => {
 
                 <View style={styles.sectionHeadingContainer}>
                     <Text style={styles.sectionHeadingText}>General</Text>
+                </View>
+                <View style={styles.listItem}>
                     <View style={styles.listItemWithIcons}>
-                        <Text>Hello</Text>
+                        <Ionicons name="information-circle" size={24} color="white" />
+                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>How to Use</Text>
+                    </View>
+                </View>
+                <View style={styles.listItem}>
+                    <View style={styles.listItemWithIcons}>
+                        <Ionicons name="people" size={24} color="white" />
+                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>About the **name of the App**</Text>
+                    </View>
+                </View>
+                <View style={styles.listItem}>
+                    <View style={styles.listItemWithIcons}>
+                        <Ionicons name="star" size={24} color="white" />
+                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>Rate Us</Text>
+                    </View>
+                </View>
+                <View style={styles.listItem}>
+                    <View style={styles.listItemWithIcons}>
+                        <Ionicons name="share-social" size={24} color="white" />
+                        <Text style={[styles.listItemText, { marginHorizontal: 20 }]}>Share to friends</Text>
                     </View>
                 </View>
 
@@ -84,7 +106,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         margin: 20,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     listItemText: {
         fontSize: 16,
@@ -94,12 +116,11 @@ const styles = StyleSheet.create({
         color: colors.gray
     },
     listItemWithIcons: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems:'center'
     },
     sectionHeadingContainer: {
         margin: 20,
-        fontSize: 20,
-        fontWeight: 'bold'
     },
     sectionHeadingText: {
         color: 'white',
