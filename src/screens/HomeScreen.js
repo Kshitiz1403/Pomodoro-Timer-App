@@ -42,6 +42,12 @@ const HomeScreen = () => {
         second = `0${second}`
     }
 
+    let minute = time.m
+    if (minute < 0) {
+        alert('done')
+        resetHandler()
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.timer}>
