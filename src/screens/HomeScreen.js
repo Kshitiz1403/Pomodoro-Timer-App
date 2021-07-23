@@ -18,6 +18,9 @@ const HomeScreen = ({ navigation }) => {
     //  Let app run in background
     // 
 
+    // Known issues - 
+    // If the user denies to take a break, then he won't be asked for a break in the next pomodoro cycle
+
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
 
@@ -90,17 +93,18 @@ const HomeScreen = ({ navigation }) => {
         if (isBreakSessionExecuted == false) {
             Alert.alert(
                 'Session Finished', '', [
-                { text: 'close', onPress: () => { console.log('alert closed') } },
+                { text: 'close', onPress: () => {} },
                 { text: 'start break', onPress: () => { changeTimerStateToBreakState() } }
             ]
             )
-            setIsBreakSessionExecuted(true)
+            
         }
         resetHandler()
     }
 
     const changeTimerStateToBreakState = () => {
         setTime(initialBreakState)    
+        setIsBreakSessionExecuted(true)
     }
 
 
