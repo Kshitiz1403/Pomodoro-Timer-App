@@ -9,14 +9,17 @@ const RootStack = createStackNavigator(
         Home: {
             screen: HomeScreen,
             navigationOptions: {
-            }
+                
+            },
+            
         },
     },
     {
         defaultNavigationOptions: {
-            headerShown: false
+            headerShown: false,
+            
         }
-    }
+    },
 )
 
 export default createAppContainer(RootStack)
