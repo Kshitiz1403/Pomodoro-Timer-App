@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
 
-    const initialTimeState = { m: 5, s: 60 }
+    const initialTimeState = { m: 25, s: 60 }
     const initialBreakState = { m: 2, s: 60 }
 
     const [time, setTime] = useState(initialTimeState)
@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
 
     const runHandler = () => {
         startHandler()
-        refreshIntervalId = setInterval(startHandler, 10)
+        refreshIntervalId = setInterval(startHandler, 1000)
         setIsStart(true)
         numberOfTimerCyclesRun++
         return (
