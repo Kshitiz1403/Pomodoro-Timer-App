@@ -16,21 +16,31 @@ const HomeScreen = () => {
         return (setTime({ m: updatedM, s: updatedS }))
     }
 
-    const resetHandler = () => setTime({ m: 25, s: 0 })
+    const run = () => {
+        refreshIntervalId = setInterval(startHandler, 1000)
+        return (
+            refreshIntervalId
+        )
+    }
+
+    const resetHandler = () => {
+        return (
+            clearInterval(refreshIntervalId),
+            setTime({ m: 25, s: 0 })
+        )
+    }
 
     let second = time.s
     if (second == 60) {
         second = '0'
     }
-    else{
+    else {
         second = time.s
     }
 
     if (second < 10) {
         second = `0${second}`
     }
-
-
 
     return (
         <View style={styles.container}>
@@ -41,9 +51,8 @@ const HomeScreen = () => {
                 {/* {time.s > 9 ? time.s : `0${time.s}`} */}
             </Text>
 
-
             <View style={{ flexDirection: 'row' }}>
-                <Button title='start' onPress={startHandler} />
+                <Button title='start' onPress={run} />
                 <Button title='reset' onPress={resetHandler} />
             </View>
         </View>
