@@ -3,7 +3,9 @@ import { Button, StyleSheet, Switch, Text, View } from 'react-native'
 
 const HomeScreen = () => {
 
-    const [time, setTime] = useState({ m: 25, s: 60 })
+    const initialTimeState = {m:25, s:60}
+    
+    const [time, setTime] = useState(initialTimeState)
 
     const [isStart, setIsStart] = useState(false)
 
@@ -18,7 +20,8 @@ const HomeScreen = () => {
         return (setTime({ m: updatedM, s: updatedS }))
     }
 
-    const run = () => {
+    const runHandler = () => {
+        startHandler()
         refreshIntervalId = setInterval(startHandler, 1000)
         setIsStart(true)
         return (
@@ -30,7 +33,7 @@ const HomeScreen = () => {
         setIsStart(false)
         return (
             clearInterval(refreshIntervalId),
-            setTime({ m: 25, s: 0 })
+            setTime(initialTimeState)
         )
     }
 
@@ -62,8 +65,7 @@ const HomeScreen = () => {
             </Text>
 
             <View style={{ flexDirection: 'row' }}>
-                <Button title={isStart == false ? 'start' : 'reset'} onPress={isStart == false ? run : resetHandler} />
-                {/* <Button title='reset' onPress={resetHandler} /> */}
+                <Button title={isStart == false ? 'start' : 'reset'} onPress={isStart == false ? runHandler : resetHandler} />
             </View>
         </View>
     )
