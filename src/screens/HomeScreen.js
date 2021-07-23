@@ -1,5 +1,7 @@
+import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import colors from '../constants/colors'
 import Colors from '../constants/colors'
 
 const HomeScreen = () => {
@@ -71,6 +73,12 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
+            <StatusBar
+                backgroundColor=
+                {colors.primary}
+                // {isStart == false ? colors.secondary : colors.tertiary}
+            />
+
             <Text style={styles.timer}>
 
                 {time.m > 10 ? time.m : `0${time.m}`} : {second}
@@ -99,7 +107,6 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 50,
-        // backgroundColor: colors.secondary,
         height: 50,
         borderRadius: 25
     }
