@@ -8,29 +8,38 @@ import Settings from '../screens/Settings'
 
 const RootStack = createStackNavigator(
     {
-        // Settings: {
-        //     screen: Settings,
-        //     navigationOptions:{
-        //         headerShown:true,
-        //         headerStyle:{
-        //             backgroundColor:colors.primary,
-        //             // elevation:0
-        //         },
-        //         headerTintColor:'white'
-        //     },
-        // },
         Home: {
             screen: HomeScreen,
             navigationOptions: {
             },
         },
+        Settings: {
+            screen: Settings,
+            navigationOptions:{
+                headerShown:true,
+                headerStyle:{
+                    backgroundColor:colors.primary,
+                    // elevation:0
+                    
+                },
+                headerTintColor:'white'
+            },
+        },
+        
         
     },
     {
         defaultNavigationOptions: {
             headerShown: false,
-
+            detachInactiveScreens:false,
+            
+            cardStyle: {backgroundColor:colors.primary, opacity:1},
+            animationEnabled:false
         },
+        mode:'modal',
+        
+        
+        
     },
 
 )
