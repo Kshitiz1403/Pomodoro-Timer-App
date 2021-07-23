@@ -1,10 +1,23 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Switch, Text, View } from 'react-native'
+import { Button, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native'
 
 const HomeScreen = () => {
 
-    const initialTimeState = {m:25, s:60}
-    
+    //                                  To do  
+    //  Notification on start of the timer
+    //  Alert on the end of the timer - Close or Start Break
+    //  Implement Start Break Screen - On Timer end - Alert to close or start another pomodoro - brought back to the pomodoro screen
+    //  Add functionality to set custom pomodoro and break duration 
+    //  Record all pomodoros with the time they started in Async Storage
+    //  Fetch the pomodoros from Async Storage and display a productivity graph
+    //  
+    // 
+    // 
+    // 
+
+
+    const initialTimeState = { m: 25, s: 60 }
+
     const [time, setTime] = useState(initialTimeState)
 
     const [isStart, setIsStart] = useState(false)
@@ -64,9 +77,9 @@ const HomeScreen = () => {
                 {/* {time.s > 9 ? time.s : `0${time.s}`} */}
             </Text>
 
-            <View style={{ flexDirection: 'row' }}>
-                <Button title={isStart == false ? 'start' : 'reset'} onPress={isStart == false ? runHandler : resetHandler} />
-            </View>
+            {/* title={isStart == false ? 'start' : 'reset'} */}
+            <TouchableOpacity onPress={isStart == false ? runHandler : resetHandler} style={styles.button} />
+
         </View>
     )
 }
@@ -78,10 +91,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'black',
+        backgroundColor: '#264653',
     },
     timer: {
         color: 'white',
         fontSize: 100
+    },
+    button: {
+        width: 50,
+        backgroundColor: '#e76f51',
+        height: 50,
+        borderRadius: 25
     }
 })
