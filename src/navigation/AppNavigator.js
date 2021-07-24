@@ -5,26 +5,30 @@ import { createStackNavigator } from 'react-navigation-stack'
 import colors from '../constants/colors'
 import HomeScreen from '../screens/HomeScreen'
 import Settings from '../screens/Settings'
+import TimerDuration from '../screens/TimerDuration'
 
 const RootStack = createStackNavigator(
     {
-        Home: {
-            screen: HomeScreen,
-            navigationOptions: {
-            },
-        },
-        Settings: {
-            screen: Settings,
-            navigationOptions:{
-                headerShown:true,
-                headerStyle:{
-                    backgroundColor:colors.primary,
-                    elevation:0
+        // Home: {
+        //     screen: HomeScreen,
+        //     navigationOptions: {
+        //     },
+        // },
+        // Settings: {
+        //     screen: Settings,
+        //     navigationOptions:{
+        //         headerShown:true,
+        //         headerStyle:{
+        //             backgroundColor:colors.primary,
+        //             elevation:0
                     
-                },
-                headerTintColor:'white'
-            },
-        },
+        //         },
+        //         headerTintColor:'white'
+        //     },
+        // },
+        Duration:{
+            screen:TimerDuration
+        }
         
         
     },
