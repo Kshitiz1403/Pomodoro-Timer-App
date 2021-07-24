@@ -15,14 +15,14 @@ const HomeScreen = ({ navigation }) => {
     //❌  Record all pomodoros with the time they started in Async Storage
     //❌  Fetch the pomodoros from Async Storage and display a productivity graph
     //❌  Add ambient audio functionality using expo-av https://docs.expo.io/versions/latest/sdk/audio/
-    //❌  Time flickers when paused
+    //❌  Time flickers when paused - if isStart == true and isPaused ==true
     //❌  Let app run in background
     //❌  Notification/alert after break finishes 
     //❌  Status bar color remains if the pomodoro is running in the background
 
     // Known issues - 
     //✅ If the user denies to take a break, then he won't be asked for a break in the next pomodoro cycle
-    // If the user double taps to run when not initiated, the code throws error since the refresh interval id is not defined under clear interval
+    //✅ If the user double taps to run when not initiated, the code throws error since the refresh interval id is not defined under clear interval
 
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
@@ -125,7 +125,7 @@ const HomeScreen = ({ navigation }) => {
     // {console.log(numberOfTimerCyclesRun)}
     return (
         <View style={styles.container}>
-            <StatusBar style='light' backgroundColor={isStart == false ? colors.primary : colors.secondary} />
+            <StatusBar style={isStart==false?'light':'dark'} backgroundColor={isStart == false ? colors.primary : colors.tertiary} />
 
             <TouchableOpacity activeOpacity={0.6} onPress={() => pauseHandler()}>
                 <Text style={styles.timer}>
