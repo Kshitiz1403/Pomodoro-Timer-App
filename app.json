@@ -30,6 +30,7 @@
     },
     "androidNavigationBar": {
       "backgroundColor": "#264653"
-    }
+    },
+    "description": ""
   }
 }

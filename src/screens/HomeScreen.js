@@ -4,22 +4,25 @@ import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions, Alert } 
 import colors from '../constants/colors'
 import Colors from '../constants/colors'
 import { SimpleLineIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
-    //                                  To do  
-    //  Notification on start of the timer
-    //  Alert on the end of the timer - Close or Start Break
-    //  Implement Start Break Screen - On Timer end - Alert to close or start another pomodoro - brought back to the pomodoro screen
-    //  Add functionality to set custom pomodoro and break duration 
-    //  Record all pomodoros with the time they started in Async Storage
-    //  Fetch the pomodoros from Async Storage and display a productivity graph
-    //  Add ambient audio functionality using expo-av https://docs.expo.io/versions/latest/sdk/audio/
-    //  Time flickers when paused
-    //  Let app run in background
-    // 
+    //                                  To do  🚀🚀🚀🚀🔥🔥🔥🔥
+    //❌  Notification on start of the timer
+    //✅  Alert on the end of the timer - Close or Start Break
+    //✅  Implement Start Break Screen - On Timer end - Alert to close or start another pomodoro - brought back to the pomodoro screen
+    //❌  Add functionality to set custom pomodoro and break duration 
+    //❌  Record all pomodoros with the time they started in Async Storage
+    //❌  Fetch the pomodoros from Async Storage and display a productivity graph
+    //❌  Add ambient audio functionality using expo-av https://docs.expo.io/versions/latest/sdk/audio/
+    //❌  Time flickers when paused
+    //❌  Let app run in background
+    //❌  Notification/alert after break finishes 
+    //❌  Status bar color remains if the pomodoro is running in the background
 
     // Known issues - 
-    // If the user denies to take a break, then he won't be asked for a break in the next pomodoro cycle
+    //✅ If the user denies to take a break, then he won't be asked for a break in the next pomodoro cycle
+    // If the user double taps to run when not initiated, the code throws error since the refresh interval id is not defined under clear interval
 
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
@@ -51,6 +54,8 @@ const HomeScreen = ({ navigation }) => {
     const runHandler = () => {
         startHandler()
         refreshIntervalId = setInterval(startHandler, 10)
+        { console.log(refreshIntervalId) }
+
         setIsStart(true)
         numberOfTimerCyclesRun++
         return (
@@ -60,6 +65,7 @@ const HomeScreen = ({ navigation }) => {
 
     const resetHandler = () => {
         setIsStart(false)
+        setIsPaused(false)
         return (
             clearInterval(refreshIntervalId),
             setTime(initialTimeState)
@@ -83,43 +89,43 @@ const HomeScreen = ({ navigation }) => {
         second = `0${second}`
     }
 
-    
+
 
     let minute = time.m
     if (minute < 0) {
-        // Here the main timer stops
+        // Here the timer stops
 
         setIsBreakSessionExecuted(false)
         if (isBreakSessionExecuted == false) {
             Alert.alert(
                 'Session Finished', '', [
-                { text: 'close', onPress: () => {} },
+                { text: 'close', onPress: () => { } },
                 { text: 'start break', onPress: () => { changeTimerStateToBreakState() } }
             ]
             )
-            
+
         }
         resetHandler()
     }
 
     const changeTimerStateToBreakState = () => {
-        setTime(initialBreakState)    
+        setTime(initialBreakState)
         setIsBreakSessionExecuted(true)
     }
 
-
     const pauseHandler = () => {
-        isPaused == true ? runHandler() : clearInterval(refreshIntervalId)
-        setIsPaused(v => !v)
+        if (isStart == true) {
+            isPaused == true ? runHandler() : clearInterval(refreshIntervalId)
+            setIsPaused(v => !v)
+        }
+        else {
+            isPaused == false ? runHandler() : null
+        }
     }
     // {console.log(numberOfTimerCyclesRun)}
-
     return (
         <View style={styles.container}>
-            <StatusBar
-                backgroundColor=
-                {colors.primary}
-            />
+            <StatusBar style='light' backgroundColor={isStart == false ? colors.primary : colors.secondary} />
 
             <TouchableOpacity activeOpacity={0.6} onPress={() => pauseHandler()}>
                 <Text style={styles.timer}>
@@ -153,11 +159,18 @@ const HomeScreen = ({ navigation }) => {
 
             </View> */}
 
-            <TouchableOpacity
-                onPress={() => navigation.navigate('Settings')}
-                style={[styles.settingsContainer, { marginHorizontal: deviceHeight * 0.1, bottom: deviceHeight * 0.05 }]}>
-                <SimpleLineIcons name="settings" size={24} color="white" />
-            </TouchableOpacity>
+            <View style={[styles.controlsContainer, { bottom: deviceHeight * 0.05, width: deviceWidth * 0.9 }]}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Settings')}
+                    style={[styles.settingsContainer, { marginHorizontal: deviceWidth * 0.1, }]}>
+                    <SimpleLineIcons name="settings" size={24} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Settings')}
+                    style={[styles.musicContainer, { marginHorizontal: deviceWidth * 0.1, }]}>
+                    <Ionicons name="musical-notes" size={24} color="white" />
+                </TouchableOpacity>
+            </View>
 
         </View>
     )
@@ -188,9 +201,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    settingsContainer: {
+    controlsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         position: 'absolute',
-        alignSelf: 'flex-start',
+
+    },
+    settingsContainer: {
+        padding: 10
+    },
+    musicContainer: {
         padding: 10
     }
 })
