@@ -4,10 +4,11 @@ import CheckBox from '@react-native-community/checkbox';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
+import TimerDuration from './TimerDuration';
 
 import colors from '../constants/colors'
 
-const Settings = () => {
+const Settings = ({ navigation }) => {
 
     const [isAMOLED, setIsAMOLED] = useState(false)
     const [isKeepScreenOn, setIsKeepScreenOn] = useState(false)
@@ -16,12 +17,17 @@ const Settings = () => {
     return (
         <View style={styles.container}>
             <ScrollView>
-                <View style={styles.listItem}>
-                    <View>
-                        <Text style={styles.listItemText}>Timer Duration</Text>
-                        <Text style={styles.listItemDetailText}>Set the duration for work and break sessions</Text>
+                <Pressable
+                    onPress={() => navigation.navigate('Duration')}
+                    android_ripple={{ color: colors.underlayGray }}
+                >
+                    <View style={styles.listItem}>
+                        <View>
+                            <Text style={styles.listItemText}>Timer Duration</Text>
+                            <Text style={styles.listItemDetailText}>Set the duration for work and break sessions</Text>
+                        </View>
                     </View>
-                </View>
+                </Pressable>
 
                 <Pressable
                     onPress={() => setIsAMOLED(v => !v)}

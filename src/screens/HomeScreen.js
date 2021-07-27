@@ -8,21 +8,24 @@ import { Ionicons } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
     //                                  To do  🚀🚀🚀🚀🔥🔥🔥🔥
+    //❌  Ask for confirmation if the user wants to reset the timer
     //❌  Notification on start of the timer
-    //✅  Alert on the end of the timer - Close or Start Break
-    //✅  Implement Start Break Screen - On Timer end - Alert to close or start another pomodoro - brought back to the pomodoro screen
-    //❌  Add functionality to set custom pomodoro and break duration 
+    //❌  Add functionality to set custom pomodoro and break duration using Async Storage
     //❌  Record all pomodoros with the time they started in Async Storage
     //❌  Fetch the pomodoros from Async Storage and display a productivity graph
     //❌  Add ambient audio functionality using expo-av https://docs.expo.io/versions/latest/sdk/audio/
-    //❌  Time flickers when paused - if isStart == true and isPaused ==true
+    //❌  Time flickers when paused - (if isStart == true and isPaused ==true)
     //❌  Let app run in background
     //❌  Notification/alert after break finishes 
     //❌  Status bar color remains if the pomodoro is running in the background
+    //✅  Alert on the end of the timer - Close or Start Break
+    //✅  Implement Start Break Screen - On Timer end - Alert to close or start another pomodoro - brought back to the pomodoro screen
 
     // Known issues - 
     //✅ If the user denies to take a break, then he won't be asked for a break in the next pomodoro cycle
     //✅ If the user double taps to run when not initiated, the code throws error since the refresh interval id is not defined under clear interval
+
+    // 23hrs
 
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
@@ -54,8 +57,6 @@ const HomeScreen = ({ navigation }) => {
     const runHandler = () => {
         startHandler()
         refreshIntervalId = setInterval(startHandler, 10)
-        { console.log(refreshIntervalId) }
-
         setIsStart(true)
         numberOfTimerCyclesRun++
         return (
@@ -103,7 +104,6 @@ const HomeScreen = ({ navigation }) => {
                 { text: 'start break', onPress: () => { changeTimerStateToBreakState() } }
             ]
             )
-
         }
         resetHandler()
     }
@@ -122,10 +122,9 @@ const HomeScreen = ({ navigation }) => {
             isPaused == false ? runHandler() : null
         }
     }
-    // {console.log(numberOfTimerCyclesRun)}
     return (
         <View style={styles.container}>
-            <StatusBar style={isStart==false?'light':'dark'} backgroundColor={isStart == false ? colors.primary : colors.tertiary} />
+            <StatusBar style={isStart == false ? 'light' : 'dark'} backgroundColor={isStart == false ? colors.primary : colors.tertiary} />
 
             <TouchableOpacity activeOpacity={0.6} onPress={() => pauseHandler()}>
                 <Text style={styles.timer}>

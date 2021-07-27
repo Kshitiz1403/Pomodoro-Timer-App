@@ -18,16 +18,14 @@ const RootStack = createStackNavigator(
         //     screen: Settings,
         //     navigationOptions:{
         //         headerShown:true,
-        //         headerStyle:{
-        //             backgroundColor:colors.primary,
-        //             elevation:0
-                    
-        //         },
-        //         headerTintColor:'white'
         //     },
         // },
         Duration:{
-            screen:TimerDuration
+            screen:TimerDuration,
+            navigationOptions:{
+                headerTitle:'Settings',
+                headerShown:true
+            }
         }
         
         
@@ -38,7 +36,12 @@ const RootStack = createStackNavigator(
             detachInactiveScreens:false,
             
             cardStyle: {backgroundColor:colors.primary, opacity:1},
-            animationEnabled:false
+            animationEnabled:false,
+            headerStyle:{
+                backgroundColor:colors.primary,
+                elevation:0
+            },
+            headerTintColor:'white'
         },
         mode:'modal',
         
