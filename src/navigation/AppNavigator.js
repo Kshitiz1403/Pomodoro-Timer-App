@@ -9,17 +9,17 @@ import TimerDuration from '../screens/TimerDuration'
 
 const RootStack = createStackNavigator(
     {
-        // Home: {
-        //     screen: HomeScreen,
-        //     navigationOptions: {
-        //     },
-        // },
-        // Settings: {
-        //     screen: Settings,
-        //     navigationOptions:{
-        //         headerShown:true,
-        //     },
-        // },
+        Home: {
+            screen: HomeScreen,
+            navigationOptions: {
+            },
+        },
+        Settings: {
+            screen: Settings,
+            navigationOptions:{
+                headerShown:true,
+            },
+        },
         Duration:{
             screen:TimerDuration,
             navigationOptions:{
