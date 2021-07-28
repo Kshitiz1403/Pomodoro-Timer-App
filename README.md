@@ -48,9 +48,7 @@ Please refer to this Expo documentation link for further information on this res
 
 Link: https://docs.expo.io/workflow/publishing/#on-ios-you-cant-share-your-published
 
-Due to the nature of this project objective being an educational and experimental one in learning more about working with React Native and the Expo framework in a production-like environment mimicking a professional workflow, this app isn't built for distributing officially to either the Play Store or the App Store.
 
-For this, please refer to the app screenshots below. A mixture of both screenshot pictures and GIFs is provided as an alternative for previewing the app.
 
 ## ⚙Core Tech Stack
 
