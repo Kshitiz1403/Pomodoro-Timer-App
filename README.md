@@ -26,7 +26,6 @@ Get rid of procrastination and imporve your time management!
 
 2. Open the [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent) app or simply go to the [Expo website](https://expo.io/) and follow the instructions to register for an Expo account
 
-- Note: **_You will need an account on Expo in order to view the app!_**
 
 3. After completing step 1 and 2 above, open your device camera and scan the provided QR code in the link below:
 
