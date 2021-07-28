@@ -146,5 +146,3 @@ For this, please refer to the app screenshots below. A mixture of both screensho
  
 ## 📷 Screenshots
 <img src="https://i.ibb.co/7CDFqyv/ezgif-5-c11e0b206358.gif" width="234.76"/>
-
-![Illustration to use for new users]($https://i.ibb.co/7CDFqyv/ezgif-5-c11e0b206358.gif =234.76x)
