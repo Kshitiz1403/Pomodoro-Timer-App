@@ -41,18 +41,20 @@ const TimerDuration = () => {
     }
 
     const workTextInputHandler = (text) => {
-        let valid = ''
-        for (let t of text){
-            if (t != '.' && t != ',' && t != ' ' && t != '-') {
-                console.log('ummm')
-                valid+=t
-                setWorkTextInput(valid)
-                setWorkSessionDuration(parseInt(valid))
-            }
-            else{
-                console.log('else')
-            }
-        }
+        setWorkTextInput(text)
+        setWorkSessionDuration(parseInt(text))
+        // let valid = ''
+        // for (let t of text){
+        //     if (t != '.' && t != ',' && t != ' ' && t != '-') {
+        //         console.log('ummm')
+        //         valid+=t
+        //         setWorkTextInput(valid)
+        //         setWorkSessionDuration(parseInt(valid))
+        //     }
+        //     else{
+        //         console.log('else')
+        //     }
+        // }
         
     }
 
