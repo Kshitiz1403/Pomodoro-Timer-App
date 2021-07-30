@@ -24,8 +24,9 @@ const HomeScreen = ({ navigation }) => {
     // Known issues - 
     //✅ If the user denies to take a break, then he won't be asked for a break in the next pomodoro cycle
     //✅ If the user double taps to run when not initiated, the code throws error since the refresh interval id is not defined under clear interval
+    //❌ In the enter break session duration in timer duration screen, when the user clears everything, then the cursor instead of center aligning, aligns to the right
 
-    // Suggestions
+    // Suggestions - 
     // Import calendar and auto suggest pomodoros
     // 23hrs
 
