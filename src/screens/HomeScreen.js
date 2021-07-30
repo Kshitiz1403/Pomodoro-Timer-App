@@ -18,6 +18,7 @@ const HomeScreen = ({ navigation }) => {
     //❌  Let app run in background
     //❌  Notification/alert after break finishes 
     //❌  Status bar color remains if the pomodoro is running in the background
+    //❌  Show completed pomodoros of the day on the bottom of the screen
     //✅  Alert on the end of the timer - Close or Start Break
     //✅  Implement Start Break Screen - On Timer end - Alert to close or start another pomodoro - brought back to the pomodoro screen
 
@@ -33,8 +34,8 @@ const HomeScreen = ({ navigation }) => {
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
 
-    const initialTimeState = { m: 5, s: 60 }
-    const initialBreakState = { m: 2, s: 60 }
+    const initialTimeState = { m: 25, s: 60 }
+    const initialBreakState = { m: 5, s: 60 }
 
     const [time, setTime] = useState(initialTimeState)
 
@@ -58,8 +59,7 @@ const HomeScreen = ({ navigation }) => {
     }
 
     const runHandler = () => {
-        startHandler()
-        refreshIntervalId = setInterval(startHandler, 10)
+        refreshIntervalId = setInterval(startHandler, 1000)
         setIsStart(true)
         numberOfTimerCyclesRun++
         return (
