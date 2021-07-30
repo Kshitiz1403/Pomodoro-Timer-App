@@ -58,8 +58,7 @@ const HomeScreen = ({ navigation }) => {
     }
 
     const runHandler = () => {
-        startHandler()
-        refreshIntervalId = setInterval(startHandler, 10)
+        refreshIntervalId = setInterval(startHandler, 1000)
         setIsStart(true)
         numberOfTimerCyclesRun++
         return (
