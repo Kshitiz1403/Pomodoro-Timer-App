@@ -41,26 +41,14 @@ const TimerDuration = () => {
     }
 
     const workTextInputHandler = (text) => {
-        setWorkTextInput(text)
-        setWorkSessionDuration(parseInt(text))
-        // let valid = ''
-        // for (let t of text){
-        //     if (t != '.' && t != ',' && t != ' ' && t != '-') {
-        //         console.log('ummm')
-        //         valid+=t
-        //         setWorkTextInput(valid)
-        //         setWorkSessionDuration(parseInt(valid))
-        //     }
-        //     else{
-        //         console.log('else')
-        //     }
-        // }
-        
+        setWorkTextInput(text.replace(/[^0-9]/g, ''))
+
+        setWorkSessionDuration(parseInt(text.replace(/[^0-9]/g, '')))        
     }
 
     const breakTextInputHandler = (text) => {
-        setBreakTextInput(text)
-        setBreakSessionDuration(parseInt(text))
+        setBreakTextInput(text.replace(/[^0-9]/g, ''))
+        setBreakSessionDuration(parseInt(text.replace(/[^0-9]/g, '')))
     }
 
 
@@ -82,8 +70,10 @@ const TimerDuration = () => {
                                     <TextInput
                                         keyboardType='number-pad'
                                         style={[modalStyles.textInput, { width: deviceWidth * 0.5, }]}
+                                        // onChangeText={(text)=>workTextInputHandler(text)}
                                         onChangeText={(text)=>workTextInputHandler(text)}
                                         value={workTextInput}
+                                        // value={workSessionDuration}
                                         placeholder='Enter break session duration'
                                         onKeyPress={({ nativeEvent }) => {
                                             nativeEvent.key === 'Backspace' ? setInputLock(true) : ''
