@@ -75,9 +75,6 @@ const TimerDuration = () => {
                                         value={workTextInput}
                                         // value={workSessionDuration}
                                         placeholder='Enter break session duration'
-                                        onKeyPress={({ nativeEvent }) => {
-                                            nativeEvent.key === 'Backspace' ? setInputLock(true) : ''
-                                        }}
                                     />
                                     <View style={modalStyles.buttonsContainer}>
                                         <TouchableOpacity onPress={workSessionModalClose} activeOpacity={0.2} style={modalStyles.buttons}>
