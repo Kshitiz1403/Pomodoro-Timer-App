@@ -26,8 +26,7 @@ const Settings = ({ navigation }) => {
                         {props.icon}
                         <View style={{ marginLeft: 20, justifyContent: 'center' }}>
                             <Text style={styles.listItemText}>{props.title}</Text>
-                            {props.isDescription == true ? <Text style={styles.listItemDetailText}>{props.description}</Text> : null}
-
+                            {props.description ? <Text style={styles.listItemDetailText}>{props.description}</Text> : null}
                         </View>
                     </View>
                     <View>
@@ -48,7 +47,6 @@ const Settings = ({ navigation }) => {
             <ScrollView>
                 {/* <Item
                     title='Timer Duration'
-                    isDescription
                     description='Set the duration for work and break sessions'
                     onTap={() => navigation.navigate('Duration')}
                     icon={<MaterialCommunityIcons name="timer-sand" size={24} color="white" />}
