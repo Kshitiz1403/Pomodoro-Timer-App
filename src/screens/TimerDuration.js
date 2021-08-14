@@ -74,7 +74,7 @@ const TimerDuration = () => {
                                         onChangeText={(text)=>workTextInputHandler(text)}
                                         value={workTextInput}
                                         // value={workSessionDuration}
-                                        placeholder='Enter break session duration'
+                                        placeholder='Enter duration'
                                     />
                                     <View style={modalStyles.buttonsContainer}>
                                         <TouchableOpacity onPress={workSessionModalClose} activeOpacity={0.2} style={modalStyles.buttons}>
@@ -106,7 +106,7 @@ const TimerDuration = () => {
                                         style={[modalStyles.textInput, { width: deviceWidth * 0.5, }]}
                                         onChangeText={breakTextInputHandler}
                                         value={breakTextInput}
-                                        placeholder='Enter break session duration'
+                                        placeholder='Enter duration'
                                     />
                                     <View style={modalStyles.buttonsContainer}>
                                         <TouchableOpacity onPress={breakSessionModelClose} activeOpacity={0.2} style={modalStyles.buttons}>
