@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions, Alert } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions, Alert, Vibration } from 'react-native'
 import colors from '../constants/colors'
 import Colors from '../constants/colors'
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -13,8 +13,9 @@ const HomeScreen = ({ navigation }) => {
     //❌  Add functionality to set custom pomodoro and break duration using Async Storage
     //❌  Record all pomodoros with the time they started in Async Storage
     //❌  Fetch the pomodoros from Async Storage and display a productivity graph
+    //❌  Vibrate at the end of pomodoro session
     //❌  Add ambient audio functionality using expo-av https://docs.expo.io/versions/latest/sdk/audio/
-    //❌  Time flickers when paused - (if isStart == true and isPaused ==true)
+    //❌  Time flickers (fades in and out) when paused - (if isStart == true && isPaused ==true)
     //❌  Let app run in background
     //❌  Notification/alert after break finishes 
     //❌  Status bar color remains if the pomodoro is running in the background
@@ -34,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
     const deviceHeight = useWindowDimensions().height
     const deviceWidth = useWindowDimensions().width
 
-    const initialTimeState = { m: 25, s: 60 }
+    const initialTimeState = { m: 3, s: 60 }
     const initialBreakState = { m: 5, s: 60 }
 
     const [time, setTime] = useState(initialTimeState)
@@ -45,7 +46,8 @@ const HomeScreen = ({ navigation }) => {
 
     const [isBreakSessionExecuted, setIsBreakSessionExecuted] = useState(false)
 
-    let numberOfTimerCyclesRun = 0;
+    const [numberOfTimerCyclesRun, setNumberOfTimerCyclesRun] = useState(0)
+    // let numberOfTimerCyclesRun = 0;
 
     let updatedM = time.m, updatedS = time.s
 
@@ -59,9 +61,9 @@ const HomeScreen = ({ navigation }) => {
     }
 
     const runHandler = () => {
-        refreshIntervalId = setInterval(startHandler, 1000)
+        refreshIntervalId = setInterval(startHandler, 10)
         setIsStart(true)
-        numberOfTimerCyclesRun++
+        setNumberOfTimerCyclesRun(v=>v+1)
         return (
             refreshIntervalId
         )
@@ -99,6 +101,8 @@ const HomeScreen = ({ navigation }) => {
     if (minute < 0) {
         // Here the timer stops
 
+        // Need to add a conditional if vibration is checked then only execute this ->
+        Vibration.vibrate([0, 1000], false)
         setIsBreakSessionExecuted(false)
         if (isBreakSessionExecuted == false) {
             Alert.alert(
